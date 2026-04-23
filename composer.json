@@ -1,6 +1,6 @@
 {
-    "name": "springbok/module-site-search-ai",
-    "description": "Magento 2 integration for Site Search AI (widget, Firestore config sync).",
+    "name": "springbok/module-ai-search",
+    "description": "Magento 2 integration for Site Search AI.",
     "type": "magento2-module",
     "license": "GPL-2.0-or-later",
     "require": {
