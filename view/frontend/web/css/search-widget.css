@@ -1,0 +1,623 @@
+:root {
+    --ssai-primary-color: #0066cc;
+    --ssai-bg-color: #ffffff;
+    --ssai-text-color: #333333;
+    --ssai-border-color: #e0e0e0;
+    --ssai-border-radius: 8px;
+    --ssai-border-width: 1px;
+    --ssai-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    --ssai-font-family: inherit;
+    --ssai-font-size: 15px;
+}
+
+/* Search container */
+.ssai-search-container {
+    position: relative;
+}
+
+/* Search input wrapper for button positioning */
+.ssai-search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.ssai-search-input {
+    width: 100%;
+    padding: 12px 50px 12px 16px;
+    font-size: 16px;
+    border: 2px solid var(--ssai-border-color);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.ssai-search-input:focus {
+    border-color: var(--ssai-primary-color);
+}
+
+/* Search button */
+.ssai-search-button {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--ssai-primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ssai-search-button:hover {
+    filter: brightness(1.1);
+}
+
+.ssai-search-button:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.ssai-search-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Results container */
+.ssai-results-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin-top: 8px;
+    background: var(--ssai-bg-color);
+    border-radius: var(--ssai-border-radius);
+    border: var(--ssai-border-width) solid var(--ssai-border-color);
+    box-shadow: var(--ssai-box-shadow);
+    z-index: 99999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.ssai-results-container.ssai-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Coupled container (when results are injected into an existing div) */
+.ssai-results-container.ssai-coupled-container {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+/* Overlay position variant */
+.ssai-results-container[data-position="overlay"] {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.ssai-results-container[data-position="overlay"].ssai-visible {
+    transform: translate(-50%, -50%);
+}
+
+/* Result card */
+.ssai-result {
+    padding: 20px;
+    font-family: var(--ssai-font-family);
+}
+
+.ssai-answer {
+    font-size: var(--ssai-font-size);
+    line-height: 1.6;
+    color: var(--ssai-text-color);
+    margin-bottom: 16px;
+}
+
+/* CTA Buttons Container */
+.ssai-cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+/* CTA Button Base */
+.ssai-cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none !important;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+.ssai-cta-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Primary CTA (API-generated) */
+.ssai-cta-button.ssai-cta-primary {
+    background: var(--ssai-primary-color);
+    color: white !important;
+}
+
+.ssai-cta-button.ssai-cta-primary:hover {
+    filter: brightness(1.1);
+}
+
+/* Custom CTA (User-defined) */
+.ssai-cta-button.ssai-cta-custom {
+    background: transparent;
+    color: var(--ssai-primary-color) !important;
+    border: 2px solid var(--ssai-primary-color);
+}
+
+.ssai-cta-button.ssai-cta-custom:hover {
+    background: var(--ssai-primary-color);
+    color: white !important;
+}
+
+/* Sources */
+.ssai-sources {
+    border-top: 1px solid var(--ssai-border-color);
+    padding-top: 12px;
+    margin-top: 12px;
+}
+
+.ssai-sources-label {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.ssai-source-link {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--ssai-primary-color);
+    text-decoration: none;
+    margin-right: 12px;
+    margin-bottom: 4px;
+}
+
+.ssai-source-link:hover {
+    text-decoration: underline;
+}
+
+/* Loading state */
+.ssai-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    gap: 12px;
+    color: #666;
+}
+
+.ssai-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--ssai-border-color);
+    border-top-color: var(--ssai-primary-color);
+    border-radius: 50%;
+    animation: ssai-spin 0.8s linear infinite;
+}
+
+@keyframes ssai-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Error state */
+.ssai-error {
+    padding: 20px;
+    text-align: center;
+    color: #e74c3c;
+}
+
+/* Empty answer / no AI result (live search dropdown) */
+.ssai-no-results {
+    padding: 20px;
+    text-align: center;
+    font-family: var(--ssai-font-family);
+    font-size: var(--ssai-font-size);
+    color: var(--ssai-text-color);
+    opacity: 0.85;
+}
+
+/* Powered by - Base styles */
+.ssai-powered-by {
+    text-align: right;
+    margin-top: 12px;
+    font-family: var(--ssai-font-family);
+}
+
+/* Powered by - Small prominence (subtle) */
+.ssai-powered-by--small {
+    font-size: 10px;
+    color: #bbb;
+    opacity: 0.7;
+}
+
+/* Powered by - Medium prominence (balanced) */
+.ssai-powered-by--medium {
+    font-size: 12px;
+    color: #888;
+    padding-top: 8px;
+    border-top: 1px solid var(--ssai-border-color);
+}
+
+/* Powered by - Large prominence (prominent) */
+.ssai-powered-by--large {
+    font-size: 14px;
+    color: var(--ssai-text-color);
+    font-weight: 500;
+    padding: 12px 0 4px;
+    border-top: 2px solid var(--ssai-primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+.ssai-powered-by--large::before {
+    content: "✨";
+}
+
+/* AI Overview container (for search results pages) */
+.ssai-overview-container {
+    background: var(--ssai-bg-color);
+    border-radius: 12px;
+    box-shadow: var(--ssai-shadow);
+    margin-bottom: 24px;
+    overflow: hidden;
+    font-family: var(--ssai-font-family);
+}
+
+/* AI Overview container */
+.ssai-overview-container {
+    margin-bottom: 30px;
+    background-color: var(--ssai-bg-color);
+    color: var(--ssai-text-color);
+    font-family: var(--ssai-font-family);
+    font-size: var(--ssai-font-size);
+    border-radius: var(--ssai-border-radius);
+    border: var(--ssai-border-width) solid var(--ssai-border-color);
+    box-shadow: var(--ssai-box-shadow);
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Auto-injected AI Overview - positioned at top of page content */
+.ssai-overview-container.ssai-auto-injected {
+    max-width: var(--ssai-overview-container-max-width, 900px);
+    margin: 20px auto 30px auto;
+    position: relative;
+    z-index: 100;
+}
+
+/* --- AI Overview loading line & state transitions --- */
+
+/* Loading: thin glowing line */
+.ssai-overview-container.ssai-overview-loading {
+    height: 3px;
+    min-height: 0;
+    padding: 0;
+    margin-bottom: 0;
+    border: none;
+    border-radius: 2px;
+    box-shadow: none;
+    overflow: hidden;
+    position: relative;
+    background: var(--ssai-border-color);
+}
+
+.ssai-overview-container.ssai-overview-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 40%;
+    background: linear-gradient(90deg, transparent, var(--ssai-primary-color), transparent);
+    animation: ssai-glow-sweep 1.5s ease-in-out infinite;
+}
+
+@keyframes ssai-glow-sweep {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(350%); }
+}
+
+/* Expanding: container grows from the line */
+.ssai-overview-container.ssai-overview-expanding {
+    height: auto;
+    max-height: 0;
+    overflow: hidden;
+    border-radius: var(--ssai-border-radius);
+    border: var(--ssai-border-width) solid var(--ssai-border-color);
+    box-shadow: var(--ssai-box-shadow);
+    background-color: var(--ssai-bg-color);
+    transition: max-height 0.6s ease-out, margin-bottom 0.4s ease;
+    margin-bottom: 30px;
+}
+
+.ssai-overview-container.ssai-overview-expanding::after {
+    display: none;
+}
+
+.ssai-overview-container.ssai-overview-expanding.ssai-expand-active {
+    max-height: 2000px;
+}
+
+/* Loaded: stable final state */
+.ssai-overview-container.ssai-overview-loaded {
+    max-height: none;
+    overflow: visible;
+    height: auto;
+    border-radius: var(--ssai-border-radius);
+    border: var(--ssai-border-width) solid var(--ssai-border-color);
+    box-shadow: var(--ssai-box-shadow);
+    background-color: var(--ssai-bg-color);
+    margin-bottom: 30px;
+}
+
+.ssai-overview-container.ssai-overview-loaded::after {
+    display: none;
+}
+
+/* No match: fade out the line */
+.ssai-overview-container.ssai-overview-no-match {
+    height: 3px;
+    min-height: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.ssai-overview-container.ssai-overview-no-match::after {
+    display: none;
+}
+
+/* --- End loading line states --- */
+
+.ssai-overview-title {
+    margin: 0;
+    padding: 16px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ssai-primary-color);
+    background: linear-gradient(135deg, rgba(0, 102, 204, 0.08), rgba(0, 102, 204, 0.02));
+    border-bottom: 1px solid var(--ssai-border-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ssai-overview-title .ssai-emoji {
+    font-style: normal;
+}
+
+/* Remove the old hardcoded emoji if it exists */
+.ssai-overview-title::before {
+    display: none;
+}
+
+.ssai-overview-content {
+    padding: 20px;
+}
+
+.ssai-overview-content .ssai-answer {
+    font-size: var(--ssai-font-size);
+    line-height: 1.7;
+    color: var(--ssai-text-color);
+    margin-bottom: 16px;
+}
+
+.ssai-overview-content .ssai-loading {
+    padding: 40px 24px;
+}
+
+/* Feedback (thumbs up/down) */
+.ssai-feedback {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--ssai-border-color);
+}
+
+.ssai-feedback-label {
+    font-size: 13px;
+    color: #666;
+    margin-right: 4px;
+}
+
+.ssai-feedback-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px 8px;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.ssai-feedback-btn:hover:not(:disabled) {
+    opacity: 1;
+}
+
+.ssai-feedback-btn:disabled {
+    cursor: default;
+}
+
+.ssai-feedback-thanks {
+    font-size: 13px;
+    color: var(--ssai-primary-color);
+}
+
+/* Product cards (horizontal layout: image, title, link) */
+.ssai-products-wrapper {
+    margin: 20px 0 16px 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--ssai-border-color);
+}
+
+.ssai-product-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+.ssai-product-card {
+    flex: 0 1 var(--ssai-product-card-max-width, 160px);
+    min-width: 0;
+    max-width: var(--ssai-product-card-max-width, 160px);
+    width: 100%;
+    background: #f8f9fa;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--ssai-border-color);
+    transition: box-shadow 0.2s ease;
+}
+
+.ssai-product-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ssai-product-card-image {
+    aspect-ratio: 1;
+    background: var(--ssai-primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.ssai-product-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ssai-product-card-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 102, 204, 0.3), rgba(0, 102, 204, 0.6));
+}
+
+.ssai-product-card-title {
+    padding: 10px 12px 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ssai-text-color);
+    line-height: 1.3;
+    min-height: 2.6em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.ssai-product-card-link {
+    display: block;
+    margin: 0 12px 12px;
+    padding: 8px 14px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ssai-primary-color);
+    background: transparent;
+    border: 2px solid var(--ssai-primary-color);
+    border-radius: 8px;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+}
+
+.ssai-product-card-link:hover {
+    background: var(--ssai-primary-color);
+    color: white !important;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .ssai-results-container {
+        border-radius: 8px;
+        margin-top: 4px;
+    }
+    
+    .ssai-cta-buttons {
+        flex-direction: column;
+    }
+    
+    .ssai-cta-button {
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
+    
+    .ssai-product-cards {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .ssai-product-card {
+        max-width: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border-radius: 8px;
+    }
+
+    .ssai-product-card-image {
+        aspect-ratio: 1;
+        width: 80px;
+        min-width: 80px;
+        border-radius: 8px 0 0 8px;
+    }
+
+    .ssai-product-card-title {
+        padding: 8px 10px 4px;
+        min-height: auto;
+    }
+
+    .ssai-product-card-link {
+        margin: 0 10px 8px;
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}

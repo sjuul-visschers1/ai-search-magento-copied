@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="springbok" translate="label" sortOrder="400">
+            <label>Springbok</label>
+        </tab>
+        <section id="ssai" translate="label" type="text" sortOrder="900" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Site Search AI</label>
+            <tab>springbok</tab>
+            <resource>Springbok_SiteSearchAi::config_ssai</resource>
+            <group id="sync" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Configuration sync</label>
+                <comment><![CDATA[Codes from the Site Search AI dashboard. RAG uploads run in the dashboard, not in Magento.]]></comment>
+                <field id="config_code" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Configuration code</label>
+                </field>
+                <field id="widget_code" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Widget code</label>
+                </field>
+            </group>
+            <group id="general" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Customer</label>
+                <field id="customer_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Customer ID</label>
+                    <comment>Generated on install (cust_ + 12 chars). Sent as X-Customer-ID.</comment>
+                </field>
+                <field id="namespace" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Namespace override</label>
+                    <comment>Optional; Firestore sync usually supplies namespace.</comment>
+                </field>
+            </group>
+            <group id="selectors" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Selectors</label>
+                <field id="search_selector_json" translate="label" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Search selectors (JSON)</label>
+                    <comment><![CDATA[JSON array of objects with input/container keys. Used when Firestore does not send searchSelectors.]]></comment>
+                </field>
+                <field id="results_page_selector" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Results page selector(s)</label>
+                    <comment>One CSS selector per line or comma-separated (overview placement).</comment>
+                </field>
+            </group>
+            <group id="overview" translate="label" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>AI overview</label>
+                <field id="auto_inject" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Auto-inject overview</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="overview_target_selector" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Overview target selector</label>
+                </field>
+                <field id="overview_container_max_width" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Overview block max width</label>
+                    <comment><![CDATA[CSS length (e.g. 720px, 100%). Limits how wide the AI Overview panel is on search pages.]]></comment>
+                </field>
+                <field id="overview_product_card_max_width" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product card max width</label>
+                    <comment><![CDATA[CSS length (e.g. 120px, 160px). Smaller values make product images in the overview more compact.]]></comment>
+                </field>
+            </group>
+            <group id="behavior" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Behavior</label>
+                <field id="live_search" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Live search</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="position" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Results position</label>
+                    <source_model>Springbok\SiteSearchAi\Model\Config\Source\Position</source_model>
+                </field>
+            </group>
+            <group id="styling" translate="label" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Styling</label>
+                <field id="primary_color" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Primary color</label>
+                </field>
+                <field id="result_bg_color" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Result background</label>
+                </field>
+                <field id="result_text_color" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Result text color</label>
+                </field>
+                <field id="result_font_family" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Result font family</label>
+                </field>
+                <field id="result_font_size" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Result font size</label>
+                </field>
+                <field id="result_border_radius" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Result border radius</label>
+                </field>
+                <field id="result_border_width" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Result border width</label>
+                </field>
+                <field id="result_border_color" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Result border color</label>
+                </field>
+                <field id="result_box_shadow" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Result box shadow</label>
+                </field>
+                <field id="show_ai_emoji" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show AI emoji</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="ai_emoji_char" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AI emoji character</label>
+                </field>
+                <field id="powered_by_prominence" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Powered-by prominence</label>
+                    <source_model>Springbok\SiteSearchAi\Model\Config\Source\PoweredByProminence</source_model>
+                </field>
+            </group>
+            <group id="feedback" translate="label" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Feedback</label>
+                <field id="feedback_url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom feedback URL</label>
+                    <comment>Leave empty to use search base /feedback.</comment>
+                </field>
+            </group>
+            <group id="service" translate="label" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Service URLs (optional)</label>
+                <comment><![CDATA[Override defaults. Prefer env SSAI_BACKEND_URL / SSAI_SEARCH_URL when possible.]]></comment>
+                <field id="backend_url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Customer management base URL</label>
+                </field>
+                <field id="search_url" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Search API base URL</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

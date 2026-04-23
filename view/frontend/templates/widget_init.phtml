@@ -1,0 +1,19 @@
+<?php
+/**
+ * @var \Springbok\SiteSearchAi\Block\Frontend\WidgetInit $block
+ */
+$vm = $block->getWidgetConfig();
+$json = $vm->getSerializedWidgetConfig();
+if ($json === '') {
+    return;
+}
+$ver = $block->escapeHtmlAttr($vm->getAssetVersion());
+?>
+<script>window.SSAI_CONFIG = <?= /* @noEscape */ $json ?>;</script>
+<link rel="stylesheet"
+      href="<?= $block->escapeUrl($block->getViewFileUrl('Springbok_SiteSearchAi::css/search-widget.css')) ?>?v=<?= $ver ?>"/>
+<script src="<?= $block->escapeUrl($block->getViewFileUrl('Springbok_SiteSearchAi::js/search-widget.js')) ?>?v=<?= $ver ?>"></script>
+<?php if ($vm->shouldLoadOverviewInjectScript()): ?>
+<script>window.SSAI_OVERVIEW_INJECT = <?= /* @noEscape */ $vm->getSerializedOverviewInject() ?>;</script>
+<script src="<?= $block->escapeUrl($block->getViewFileUrl('Springbok_SiteSearchAi::js/overview-inject.js')) ?>?v=<?= $ver ?>"></script>
+<?php endif; ?>
